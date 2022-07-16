@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     {
         var state = animancer.Play(run);
         state.Speed = runSpeed;
-        state.NormalizedTime = Random.Range(0, 1);
+        state.Time = Random.Range(0, 1);
     }
 
     // Update is called once per frame
