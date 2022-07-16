@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour, ICharacterController
     public MixerTransition2D locomotion;
     [Header("Settings")]
     public float acceleration = 10f;
+    public float dashDuration = 1f;
+    public float dashSpeed = 1f;
     public float maxVelocity = 5f;
     public float drag = 1f;
     public float g = 1f;
@@ -24,6 +26,9 @@ public class PlayerController : MonoBehaviour, ICharacterController
     public bool grounded = false;
 
     [Header("References")]
+    public SkinnedMeshRenderer smr;
+    public Material standard;
+    public Material dashMaterial;
     public Camera cam;
     public KinematicCharacterMotor motor;
     public Transform cameraAnchor;
@@ -31,12 +36,32 @@ public class PlayerController : MonoBehaviour, ICharacterController
     public AnimancerComponent animancer;
     public static PlayerController inst;
     public Vector3 lookerRotation;
+    bool dashing = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        smr.material = standard;
         inst = this;
         motor.CharacterController = this;
+        InputManager.inst.mi.Misc.Dash.performed += ctx => dash();
+    }
+
+    void dash()
+    {
+        if (dashing) return;
+        StartCoroutine(performDash());
+    }
+
+    IEnumerator performDash()
+    {
+        smr.material = dashMaterial;
+        dashing = true;
+
+        yield return new WaitForSeconds(dashDuration);
+        
+        dashing = false;
+        smr.material = standard;
     }
 
     // Update is called once per frame
@@ -91,19 +116,28 @@ public class PlayerController : MonoBehaviour, ICharacterController
 
     public void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
-
-        //updating velocity
-        velocity += movementVector * acceleration * deltaTime;
-
-        //drag
-        if (movementVector == Vector3.zero) velocity *= (1f / (1f + (drag * deltaTime)));
-
-        //clamp
-        velocity = Vector3.ClampMagnitude(velocity, maxVelocity);
-
-        if (!grounded) velocity += -transform.up * g * deltaTime;
+        if (!dashing)
+        {
 
 
+            //updating velocity
+            velocity += movementVector * acceleration * deltaTime;
+
+            //drag
+            if (movementVector == Vector3.zero) velocity *= (1f / (1f + (drag * deltaTime)));
+
+            //clamp
+            velocity = Vector3.ClampMagnitude(velocity, maxVelocity);
+
+            if (!grounded) velocity += -transform.up * g * deltaTime;
+
+        }
+        else
+        {
+
+            velocity = velocity.normalized * dashSpeed * deltaTime;
+
+        }
         currentVelocity = velocity;
     }
 

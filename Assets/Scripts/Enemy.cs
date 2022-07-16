@@ -7,7 +7,9 @@ using Animancer;
 public class Enemy : MonoBehaviour
 {
     public int health = 100;
+    public float meleeDistanceThreshhold = 1f;
     public float runSpeed = 1f;
+    public AnimationClip[] attackings;
     public AnimationClip death;
     public AnimationClip run;
     public AnimationClip hit;
@@ -17,7 +19,9 @@ public class Enemy : MonoBehaviour
     float initialMaxVelocity = 0f;
     public SkinnedMeshRenderer mr;
     public Material standard;
+    public bool alive = true;
     public bool materialzed = false;
+    bool attacking = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,14 +34,33 @@ public class Enemy : MonoBehaviour
     {
         var state = animancer.Play(run);
         state.Speed = runSpeed;
-        state.Time = Random.Range(0, 1);
+        state.Time = Random.Range(0, state.Clip.length);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!alive) return;
+
         richAI.destination = player.position;
+
+        if ((player.position - transform.position).magnitude < meleeDistanceThreshhold && !attacking)
+        {
+            performAttack();
+        }
     }
+
+    void performAttack()
+    {
+        attacking = true;
+        richAI.maxSpeed = 0f;
+
+        var state = animancer.Play(attackings[Random.Range(0, attackings.Length)]);
+
+        state.Events.OnEnd = resetMovement;
+    }
+
+
 
     public void takeDamage(int damage)
     {
@@ -51,8 +74,9 @@ public class Enemy : MonoBehaviour
 
     void die()
     {
-        animancer.Play(death);
+        var state = animancer.Play(death);
         richAI.maxSpeed = 0;
+        alive = false;
     }
 
     public void dematerialize()

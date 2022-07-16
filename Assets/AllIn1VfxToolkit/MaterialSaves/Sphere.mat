@@ -130,7 +130,7 @@ Material:
     - _FadeScrollYSpeed: 0
     - _FadeTransition: 0.075
     - _Glow: 1
-    - _GlowGlobal: 2.69
+    - _GlowGlobal: 10
     - _HandDrawnAmount: 10
     - _HandDrawnSpeed: 5
     - _HsvBright: 1

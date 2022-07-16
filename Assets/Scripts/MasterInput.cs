@@ -331,6 +331,15 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a5f3d42-cb84-43a8-93e3-d1249326f10b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -342,6 +351,17 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DevicePulse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad0c1b59-0ceb-4c9f-9fcb-1a302abd612f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -371,6 +391,7 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
         // Misc
         m_Misc = asset.FindActionMap("Misc", throwIfNotFound: true);
         m_Misc_DevicePulse = m_Misc.FindAction("DevicePulse", throwIfNotFound: true);
+        m_Misc_Dash = m_Misc.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -593,11 +614,13 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Misc;
     private IMiscActions m_MiscActionsCallbackInterface;
     private readonly InputAction m_Misc_DevicePulse;
+    private readonly InputAction m_Misc_Dash;
     public struct MiscActions
     {
         private @MasterInput m_Wrapper;
         public MiscActions(@MasterInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @DevicePulse => m_Wrapper.m_Misc_DevicePulse;
+        public InputAction @Dash => m_Wrapper.m_Misc_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Misc; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -610,6 +633,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @DevicePulse.started -= m_Wrapper.m_MiscActionsCallbackInterface.OnDevicePulse;
                 @DevicePulse.performed -= m_Wrapper.m_MiscActionsCallbackInterface.OnDevicePulse;
                 @DevicePulse.canceled -= m_Wrapper.m_MiscActionsCallbackInterface.OnDevicePulse;
+                @Dash.started -= m_Wrapper.m_MiscActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_MiscActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_MiscActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_MiscActionsCallbackInterface = instance;
             if (instance != null)
@@ -617,6 +643,9 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
                 @DevicePulse.started += instance.OnDevicePulse;
                 @DevicePulse.performed += instance.OnDevicePulse;
                 @DevicePulse.canceled += instance.OnDevicePulse;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -644,5 +673,6 @@ public partial class @MasterInput : IInputActionCollection2, IDisposable
     public interface IMiscActions
     {
         void OnDevicePulse(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
