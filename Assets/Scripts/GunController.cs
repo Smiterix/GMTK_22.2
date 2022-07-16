@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
+    public GameObject projectile;
     public Transform barrel;
     public int rpm = 500;
     public float shotWaitTime = 0f;
@@ -23,7 +24,8 @@ public class GunController : MonoBehaviour
         if (InputManager.inst.leftClickDown)
         {
             if (canShoot)
-            {
+            {   
+                Instantiate(projectile, barrel.position, barrel.rotation);
                 audioSource.PlayOneShot(audioSource.clip);
                 canShoot = false;
                 ps_shoot.Play();

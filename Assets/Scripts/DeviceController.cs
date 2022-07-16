@@ -4,22 +4,33 @@ using UnityEngine;
 
 public class DeviceController : MonoBehaviour
 {
-    public Transform VFX;
     public float pulseDuration = 1f;
     public Vector3 finalSize;
     public bool pulsing = true;
     public AnimationCurve sizeCurve;
+    [Range(0, 1)]
+    public float propability = 0f;
     // Start is called before the first frame update
     void Start()
     {
         InputManager.inst.mi.Misc.DevicePulse.performed += ctx => tryPulse();
-        VFX.localScale = Vector3.zero;
+        transform.localScale = Vector3.zero;
     }
 
     void tryPulse()
     {
         if (pulsing) return;
         StartCoroutine(performPulse());
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.gameObject.layer != 7) return;
+        if (Random.Range(0f, 1f) <= propability)
+        {
+            var enemy = other.GetComponent<Enemy>();
+            enemy.dematerialize();
+        };
     }
 
     IEnumerator performPulse()
@@ -34,13 +45,12 @@ public class DeviceController : MonoBehaviour
             timeElasped += Time.deltaTime;
             progress = timeElasped / pulseDuration;
 
-            VFX.localScale = finalSize * sizeCurve.Evaluate(progress);
+            transform.localScale = finalSize * sizeCurve.Evaluate(progress);
             yield return null;
         }
 
-         pulsing = false;
-        VFX.localScale = Vector3.zero;
-
+        pulsing = false;
+        transform.localScale = Vector3.zero;
     }
 
 }
