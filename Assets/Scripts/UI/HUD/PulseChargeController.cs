@@ -18,10 +18,10 @@ public class PulseChargeController : MonoBehaviour
     [Header("Values")]
     public int initAllCharges = 5;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         allCharges.GetComponent<TextMeshProUGUI>().text = initAllCharges.ToString();
+        setChargesLeft(initAllCharges);
     }
 
     public void chargeUsed (int chargesUsed) {
