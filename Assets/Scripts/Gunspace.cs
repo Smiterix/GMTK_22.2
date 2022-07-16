@@ -26,6 +26,8 @@ public class Gunspace : MonoBehaviour
             lerp = Mathf.MoveTowards(lerp, 0, lerpSpeed * Time.deltaTime);
 
         transform.rotation = player.rotation;
+        transform.rotation *= Quaternion.Euler(PlayerController.inst.lookerRotation.x, 0f, PlayerController.inst.lookerRotation.z);
+
         transform.position = new Vector3(gunspaceposition.position.x, gunspaceposition.position.y, gunspaceposition.position.z);
 
 

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class DeviceController : MonoBehaviour
 {
+    [Header("Settings")]
+    public int pulsesLeft = 3;
+    public float pulsesCooldown = 1f;
+    public bool canPulse = true;
+    public float rechargeDuration = 5f;
+    public int maxCharges = 5;
+
+
     public float pulseDuration = 1f;
     public Vector3 finalSize;
     public bool pulsing = true;
@@ -15,11 +23,12 @@ public class DeviceController : MonoBehaviour
     {
         InputManager.inst.mi.Misc.DevicePulse.performed += ctx => tryPulse();
         transform.localScale = Vector3.zero;
+        StartCoroutine(recharge());
     }
 
     void tryPulse()
     {
-        if (pulsing) return;
+        if (pulsing || pulsesLeft == 0 || !canPulse) return;
         StartCoroutine(performPulse());
     }
 
@@ -37,6 +46,10 @@ public class DeviceController : MonoBehaviour
     {
         pulsing = true;
 
+        StartCoroutine(startCooldown());
+
+        pulsesLeft--;
+
         float timeElasped = 0f;
         float progress = 0f;
 
@@ -51,6 +64,27 @@ public class DeviceController : MonoBehaviour
 
         pulsing = false;
         transform.localScale = Vector3.zero;
+    }
+
+    IEnumerator startCooldown()
+    {
+        canPulse = false;
+        yield return new WaitForSeconds(pulsesCooldown);
+        canPulse = true;
+    }
+
+    IEnumerator recharge()
+    {
+
+        while (true)
+        {
+            if (pulsesLeft < maxCharges)
+            {
+                pulsesLeft++;
+                yield return new WaitForSeconds(rechargeDuration);
+            }
+            yield return null;
+        }
     }
 
 }

@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour, ICharacterController
     public Transform looker;
     public AnimancerComponent animancer;
     public static PlayerController inst;
+    public Vector3 lookerRotation;
 
     // Start is called before the first frame update
     void Start()
@@ -81,7 +82,8 @@ public class PlayerController : MonoBehaviour, ICharacterController
         RaycastHit hit;
         if (Physics.Raycast(cam.ScreenPointToRay(new Vector3(InputManager.inst.mousePosition.x, InputManager.inst.mousePosition.y, 0)), out hit, 100f, whatIsGround))
         {
-            looker.LookAt(hit.point);
+            looker.LookAt(hit.point + hit.normal);
+            lookerRotation = looker.rotation.eulerAngles;
             currentRotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0f, looker.rotation.eulerAngles.y, 0f), deltaTime * rotationSpeed);
             rotation = currentRotation.eulerAngles.y;
         }
