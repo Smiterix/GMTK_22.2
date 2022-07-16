@@ -979,7 +979,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  meleeDistanceThreshhold: 2
   runSpeed: 1
+  attackings:
+  - {fileID: 7400000, guid: 587a5adb008f0df4981765120b3d4b67, type: 2}
+  - {fileID: 7400000, guid: 9b2a2bfeb9547184cbca02a6dd4ce932, type: 2}
   death: {fileID: 7400000, guid: beef2a0dc5fb7ac4999846abc4bfee52, type: 2}
   run: {fileID: 7400000, guid: 89b83ebd4465fb7478b8f3540e02d5a5, type: 2}
   hit: {fileID: 7400000, guid: 0bc52b4b6a2e6c94db4bd00fccbea0b4, type: 2}
