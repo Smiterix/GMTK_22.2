@@ -15,17 +15,23 @@ MonoBehaviour:
   audioSource: {fileID: 8206458, guid: dfea19d1d34dd174d87195f78cb44ae7, type: 3}
   audioMixerGroup: {fileID: 24300002, guid: a63f18b704a1b874a8dad30baf0939e6, type: 2}
   TextureOrMaterialNames:
-  - soilSand
-  - gravel
+  - MI_Terrain
+  - T_Sand_A_alb
+  - T_Cliff_Surface_alb
+  - T_Sand_A1_alb
+  - 
   audioClips:
-  - {fileID: 8300000, guid: 061f92917f3344e46a181210cd2be5f8, type: 3}
-  - {fileID: 8300000, guid: e6b69fa3aa7d71543b631e73a8d4edaa, type: 3}
-  - {fileID: 8300000, guid: 36b2a5a7f988c3a49a8dcb97c82f3055, type: 3}
-  - {fileID: 8300000, guid: 763ef6481f64ff044b076930e3e76ba2, type: 3}
-  - {fileID: 8300000, guid: 5cbf4dba6e3b40040938560663d850cc, type: 3}
-  - {fileID: 8300000, guid: 325a507d48fda384fa119f766f5c51a7, type: 3}
-  particleObject: {fileID: 7592332085084678023, guid: d1ef58ecf23659244b2a1c7271662169,
-    type: 3}
+  - {fileID: 8300000, guid: d30e04a6a8130c94ea0e81305bafe34e, type: 3}
+  - {fileID: 8300000, guid: aa9fc337b549dd84584c1d9e9ba7837f, type: 3}
+  - {fileID: 8300000, guid: ce4cb73676a3d2242b09d99ee72aec71, type: 3}
+  - {fileID: 8300000, guid: b567cc53b45b6694c98238983bf9d304, type: 3}
+  - {fileID: 8300000, guid: 5f4ca07be4b90ce499de006019d48dd1, type: 3}
+  - {fileID: 8300000, guid: bff2cfa7e75a77746a7651e1280ab1a5, type: 3}
+  - {fileID: 8300000, guid: a8c66f7c6fccf424fa1819061bf44538, type: 3}
+  - {fileID: 8300000, guid: 380dc8a7f0926714cb0a798a36561cae, type: 3}
+  - {fileID: 8300000, guid: 24ae14e0fc6e1e04e8d3956631bfb981, type: 3}
+  - {fileID: 8300000, guid: 8d348a5300df9da4aac306ab36b3270b, type: 3}
+  particleObject: {fileID: 7592332085084678023, guid: d1ef58ecf23659244b2a1c7271662169, type: 3}
   useStepMark: 1
   stepMark: {fileID: 184202, guid: b8cf3efdf419ad74f8c0f66ab6418371, type: 3}
   stepLayer:

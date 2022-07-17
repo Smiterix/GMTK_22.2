@@ -6,7 +6,9 @@ using Animancer;
 
 public class PlayerController : MonoBehaviour, ICharacterController
 {
+    public int health = 100;
     [Header("Animation")]
+
     public float locomotionSpeed = 1f;
     public MixerTransition2D locomotion;
     [Header("Settings")]
@@ -47,6 +49,18 @@ public class PlayerController : MonoBehaviour, ICharacterController
         InputManager.inst.mi.Misc.Dash.performed += ctx => dash();
     }
 
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+            die();
+    }
+
+    void die()
+    {
+
+    }
+
     void dash()
     {
         if (dashing) return;
@@ -59,9 +73,11 @@ public class PlayerController : MonoBehaviour, ICharacterController
         dashing = true;
 
         yield return new WaitForSeconds(dashDuration);
-        
+
         dashing = false;
         smr.material = standard;
+
+        yield return new WaitForSeconds(1f);
     }
 
     // Update is called once per frame

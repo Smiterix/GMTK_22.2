@@ -6,6 +6,7 @@ using Animancer;
 
 public class Enemy : MonoBehaviour
 {
+    public int damage = 10;
     public int health = 100;
     public float meleeDistanceThreshhold = 1f;
     public float runSpeed = 1f;
@@ -57,7 +58,9 @@ public class Enemy : MonoBehaviour
 
         var state = animancer.Play(attackings[Random.Range(0, attackings.Length)]);
 
-        state.Events.OnEnd = resetMovement;
+        state.Events.OnEnd += tryDamage;
+        state.Events.OnEnd += resetMovement;
+
     }
 
 
@@ -77,6 +80,12 @@ public class Enemy : MonoBehaviour
         var state = animancer.Play(death);
         richAI.maxSpeed = 0;
         alive = false;
+    }
+
+    void tryDamage()
+    {
+        if ((player.position - transform.position).magnitude < meleeDistanceThreshhold * 1.5f && attacking)
+            PlayerController.inst.takeDamage(damage);
     }
 
     public void dematerialize()
