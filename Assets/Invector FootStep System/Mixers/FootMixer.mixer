@@ -42,6 +42,7 @@ AudioMixerGroupController:
   - {fileID: 24304546}
   m_Volume: 73b092ba4aaa1574992cf5fdd53f2c4a
   m_Pitch: db7cfe05a86f170428825e6d30dace1b
+  m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400000}
   - {fileID: 24400844}
@@ -62,6 +63,7 @@ AudioMixerGroupController:
   m_Children: []
   m_Volume: d58a208496489d04686fde68537b5750
   m_Pitch: 71b21ec6238bab34eac811b702cf2920
+  m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
   m_UserColorIndex: 0
@@ -80,6 +82,7 @@ AudioMixerGroupController:
   m_Children: []
   m_Volume: 0a42fa015cf49e7449cfd73a22c22f3e
   m_Pitch: 159ec344ab3b4314c9279eae6aac8c65
+  m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400014}
   m_UserColorIndex: 0
@@ -98,6 +101,7 @@ AudioMixerGroupController:
   m_Children: []
   m_Volume: 82708f57f4f926e4290c009b7e43cd5f
   m_Pitch: 80986893dded97d458a7692f69e13f95
+  m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400016}
   m_UserColorIndex: 0
@@ -116,6 +120,7 @@ AudioMixerGroupController:
   m_Children: []
   m_Volume: 785ff634af0c87949a98843a23b741f9
   m_Pitch: e9c3e7369c6b9ae45bcdebcf8df1780f
+  m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24426540}
   m_UserColorIndex: 0
@@ -134,6 +139,7 @@ AudioMixerGroupController:
   m_Children: []
   m_Volume: aa1cbc7f936ed4626a725ae0d9f8cd63
   m_Pitch: 60fbcd691fc3d431384692f142e5c9ba
+  m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24404740}
   m_UserColorIndex: 0
@@ -152,6 +158,7 @@ AudioMixerGroupController:
   m_Children: []
   m_Volume: 76fc2d52b85d03c4eb22ce91abac4e66
   m_Pitch: d0de9a340e51036458af290dd81a1f98
+  m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24446918}
   m_UserColorIndex: 0
@@ -391,9 +398,9 @@ AudioMixerSnapshotController:
     fd0db4d1d1cc4cf428d190ba99049eeb: -3.509042
     76fc2d52b85d03c4eb22ce91abac4e66: -10.4748535
     6debcb130d5c69844a8a283de06250aa: -2.2889833
-    785ff634af0c87949a98843a23b741f9: -9.960263
+    785ff634af0c87949a98843a23b741f9: -14.96685
     33397d641562d4a7e886bb40bbd893cd: 0.10800299
-    d58a208496489d04686fde68537b5750: -0.19117308
+    d58a208496489d04686fde68537b5750: -14.96685
     87ada7b4cde0f6a4691df747ca646875: 8.2
     7eb8c7d4efabfb646b49de1551998ca5: -13.637256
     182e4c569a6b7f448baa993f748b19dc: -2000
