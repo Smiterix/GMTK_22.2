@@ -17,24 +17,47 @@ public class PulseChargeController : MonoBehaviour
     
     [Header("Values")]
     public int initAllCharges = 5;
+    float fullChargeValue = 15f;
+    float emptyChargeValue = 0f;
 
-    void Awake()
+    void Start ()
     {
+        // Progress Bar Values
+        charge1.currentPercent = fullChargeValue;
+        charge2.currentPercent = fullChargeValue;
+        charge3.currentPercent = fullChargeValue;
+        charge4.currentPercent = fullChargeValue;
+        charge5.currentPercent = fullChargeValue;
+
+        // Text
         allCharges.GetComponent<TextMeshProUGUI>().text = initAllCharges.ToString();
-        setChargesLeft(initAllCharges);
+        setTextChargesLeft(initAllCharges);
     }
 
-    public void chargeUsed (int chargesUsed) {
-        int chargesLeft = getChargesLeft() - chargesUsed;
-        if (chargesLeft < 0) return;
-        setChargesLeft(chargesLeft);
+    public void chargeUsed (int chargesLeft) {
+        if (chargesLeft < 5) charge5.currentPercent = emptyChargeValue;
+        else charge5.currentPercent = fullChargeValue;
+
+        if (chargesLeft < 4) charge4.currentPercent = emptyChargeValue;
+        else charge4.currentPercent = fullChargeValue;
+        
+        if (chargesLeft < 3) charge3.currentPercent = emptyChargeValue;
+        else charge3.currentPercent = fullChargeValue;
+
+        if (chargesLeft < 2) charge2.currentPercent = emptyChargeValue;
+        else charge2.currentPercent = fullChargeValue;
+
+        if (chargesLeft < 1) charge1.currentPercent = emptyChargeValue;
+        else charge1.currentPercent = fullChargeValue;
+
+        setTextChargesLeft(chargesLeft);
     }
 
-    public void setChargesLeft (int charges) {
+    public void setTextChargesLeft (int charges) {
         chargesLeft.GetComponent<TextMeshProUGUI>().text = charges.ToString();
     }
 
-    public int getChargesLeft () {
+    public int getTextChargesLeft () {
         return int.Parse(chargesLeft.GetComponent<TextMeshProUGUI>().text);
     }
 }
